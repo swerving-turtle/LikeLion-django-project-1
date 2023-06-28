@@ -47,8 +47,9 @@
                 <a href="#" class="nav-link disabled" tabindex="-1">Disabled</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input type="search" class="form-control mr-sm-2" placeholder="Search">
+        <form class="form-inline my-2 my-lg-0" action="{% url 'blog:search' %}" method="post">
+            {% csrf_token %}
+            <input type="search" class="form-control mr-sm-2" name="search_word" placeholder="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
