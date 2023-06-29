@@ -24,8 +24,11 @@ from mysite.views import HomeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/register/', UserCreateView.as_view(), name='register'),
+    path('accounts/register/done', UserCreateDoneTV.as_view(), name='register_done'),
     path('', HomeView.as_view(), name='home'),
     path('bookmark/', include('bookmark.urls')),
     path('blog/', include('blog.urls')),
-    path('photo/', include('photo.urls'))
+    path('photo/', include('photo.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
