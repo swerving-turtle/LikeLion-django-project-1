@@ -1,11 +1,13 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, ArchiveIndexView, YearArchiveView, MonthArchiveView, \
-    DayArchiveView, TodayArchiveView, TemplateView, FormView
+    DayArchiveView, TodayArchiveView, TemplateView, FormView, CreateView, UpdateView, DeleteView
 
 from blog.form import PostSearchForm
 from blog.models import Post
 from django.conf import settings
+from mysite.views import OwnerOnlyMixin
 # Create your views here.
 class PostLV(ListView):
     model = Post
@@ -65,3 +67,15 @@ class SearchFormView(FormView):
         context['search_term'] = searchWord
         context['object_list'] = post_list
         return render(self.request, self.template_name, context)
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    pass
+
+class PostChangeLV(LoginRequiredMixin, ListView):
+    pass
+
+class PostUpdateView(OwnerOnlyMixin, UpdateView):
+    pass
+
+class PostDeleteView(OwnerOnlyMixin, DeleteView):
+    pass
